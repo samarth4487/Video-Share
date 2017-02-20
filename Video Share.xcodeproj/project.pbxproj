@@ -12,6 +12,8 @@
 		106CC5721E517A56004F75E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 106CC5701E517A56004F75E9 /* Main.storyboard */; };
 		106CC5741E517A56004F75E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 106CC5731E517A56004F75E9 /* Assets.xcassets */; };
 		106CC5771E517A56004F75E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 106CC5751E517A56004F75E9 /* LaunchScreen.storyboard */; };
+		10F1D1661E5AF3400071E2C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10F1D1651E5AF3400071E2C0 /* GoogleService-Info.plist */; };
+		41E384C30CA5B4B74154BEBD /* Pods_Video_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E013C4E7D2EB1468F266D4B2 /* Pods_Video_Share.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,10 @@
 		106CC5731E517A56004F75E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		106CC5761E517A56004F75E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		106CC5781E517A56004F75E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10F1D1651E5AF3400071E2C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		21A72E7EF066504BEA3E6D57 /* Pods-Video Share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Video Share.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Video Share/Pods-Video Share.debug.xcconfig"; sourceTree = "<group>"; };
+		3FD100DE5CD89249D644DBA2 /* Pods-Video Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Video Share.release.xcconfig"; path = "Pods/Target Support Files/Pods-Video Share/Pods-Video Share.release.xcconfig"; sourceTree = "<group>"; };
+		E013C4E7D2EB1468F266D4B2 /* Pods_Video_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Video_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41E384C30CA5B4B74154BEBD /* Pods_Video_Share.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				106CC56B1E517A56004F75E9 /* Video Share */,
 				106CC56A1E517A56004F75E9 /* Products */,
+				C992F68D3A09949463C7D448 /* Pods */,
+				CC3C5C19D5AF03A8AC0EBF20 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +69,26 @@
 				106CC5731E517A56004F75E9 /* Assets.xcassets */,
 				106CC5751E517A56004F75E9 /* LaunchScreen.storyboard */,
 				106CC5781E517A56004F75E9 /* Info.plist */,
+				10F1D1651E5AF3400071E2C0 /* GoogleService-Info.plist */,
 			);
 			path = "Video Share";
+			sourceTree = "<group>";
+		};
+		C992F68D3A09949463C7D448 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				21A72E7EF066504BEA3E6D57 /* Pods-Video Share.debug.xcconfig */,
+				3FD100DE5CD89249D644DBA2 /* Pods-Video Share.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CC3C5C19D5AF03A8AC0EBF20 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E013C4E7D2EB1468F266D4B2 /* Pods_Video_Share.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 106CC57B1E517A56004F75E9 /* Build configuration list for PBXNativeTarget "Video Share" */;
 			buildPhases = (
+				48F2AF3D3CAA71CA85CD4191 /* [CP] Check Pods Manifest.lock */,
 				106CC5651E517A56004F75E9 /* Sources */,
 				106CC5661E517A56004F75E9 /* Frameworks */,
 				106CC5671E517A56004F75E9 /* Resources */,
+				6F272277AF5A002056E1D607 /* [CP] Embed Pods Frameworks */,
+				15BCABB8C91E1CEE6AA6CA05 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,12 +155,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				106CC5771E517A56004F75E9 /* LaunchScreen.storyboard in Resources */,
+				10F1D1661E5AF3400071E2C0 /* GoogleService-Info.plist in Resources */,
 				106CC5741E517A56004F75E9 /* Assets.xcassets in Resources */,
 				106CC5721E517A56004F75E9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		15BCABB8C91E1CEE6AA6CA05 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Video Share/Pods-Video Share-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		48F2AF3D3CAA71CA85CD4191 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6F272277AF5A002056E1D607 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Video Share/Pods-Video Share-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		106CC5651E517A56004F75E9 /* Sources */ = {
@@ -259,6 +338,7 @@
 		};
 		106CC57C1E517A56004F75E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21A72E7EF066504BEA3E6D57 /* Pods-Video Share.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ES5YG98Z24;
@@ -272,6 +352,7 @@
 		};
 		106CC57D1E517A56004F75E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FD100DE5CD89249D644DBA2 /* Pods-Video Share.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ES5YG98Z24;
@@ -302,6 +383,7 @@
 				106CC57D1E517A56004F75E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
