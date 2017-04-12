@@ -198,7 +198,7 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: {
             (user, error) in
             
-            if let error = error as? NSError {
+            if let error = error as NSError? {
                 
                 let alertController = UIAlertController(title: "Registration Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                 let action = UIAlertAction(title: "Go Back", style: UIAlertActionStyle.default, handler: nil )
@@ -226,7 +226,7 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
                     storageRef.put(uploadData, metadata: nil, completion: {
                         (metadata, error) in
                         
-                        if let uploadError = error as? NSError {
+                        if let uploadError = error as NSError? {
                             
                             let alertController1 = UIAlertController(title: "Upload Error", message: uploadError.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                             let action1 = UIAlertAction(title: "Go Back", style: UIAlertActionStyle.default, handler: nil )
