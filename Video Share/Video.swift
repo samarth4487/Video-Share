@@ -13,4 +13,5 @@ class Video: NSObject {
     var imageURL: String?
     var videoURL: String?
     var title: String?
+    var views: Int?
 }

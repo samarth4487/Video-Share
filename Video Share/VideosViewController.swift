@@ -14,6 +14,7 @@ import MobileCoreServices
 class VideosViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var videos = [Video]()
+    var trendingVideos = [Video]()
     let bottomView = UIView()
     let modeButton = UIButton(type: .system)
     
@@ -62,19 +63,54 @@ class VideosViewController: UICollectionViewController, UICollectionViewDelegate
         if modeButton.titleLabel?.text == "All Videos" {
             
             modeButton.setTitle("Trending Videos", for: .normal)
-            observeVideos()
+            observeTrendingVideos()
+            //collectionView?.reloadData()
         } else {
             
             modeButton.setTitle("All Videos", for: .normal)
             observeVideos()
+            //collectionView?.reloadData()
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        videos = []
-        observeVideos()
+        if modeButton.titleLabel?.text == "All Videos" {
+            observeVideos()
+        } else {
+            observeTrendingVideos()
+        }
+    }
+    
+    func observeTrendingVideos() {
+        
+        trendingVideos = []
+        
+        let ref = FIRDatabase.database().reference().child("videos")
+        
+        ref.observe(.childAdded, with: {
+            ( snapshot ) in
+            
+            if let dict = snapshot.value as? [String:Any] {
+                let video = Video()
+                video.title = dict["title"] as? String
+                video.imageURL = dict["imageURL"] as? String
+                video.videoURL = dict["videoURL"] as? String
+                video.views = dict["views"] as? Int
+                
+                self.trendingVideos.append(video)
+                //print(self.trendingVideos.count)
+                
+                self.trendingVideos = self.trendingVideos.sorted(by: { $0.views! > $1.views! })
+                
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                }
+            }
+            
+        }, withCancel: nil)
+        
     }
     
     func observeVideos() {
@@ -108,7 +144,12 @@ class VideosViewController: UICollectionViewController, UICollectionViewDelegate
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos.count
+        
+        if modeButton.titleLabel?.text == "All Videos" {
+            return videos.count
+        } else {
+            return trendingVideos.count
+        }
         
     }
     
@@ -119,12 +160,23 @@ class VideosViewController: UICollectionViewController, UICollectionViewDelegate
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 10
         
-        cell.video = videos[indexPath.item]
-        cell.titleLabel.text = videos[indexPath.item].title
         
-        if let profileImageUrl = videos[indexPath.item].imageURL {
-            cell.image.downloadImageAndCache(imageURL: profileImageUrl as NSString)
+        if modeButton.titleLabel?.text == "All Videos" {
+            cell.video = videos[indexPath.item]
+            cell.titleLabel.text = videos[indexPath.item].title
+            
+            if let profileImageUrl = videos[indexPath.item].imageURL {
+                cell.image.downloadImageAndCache(imageURL: profileImageUrl as NSString)
+            }
+        } else {
+            cell.video = trendingVideos[indexPath.item]
+            cell.titleLabel.text = trendingVideos[indexPath.item].title
+            
+            if let profileImageUrl = trendingVideos[indexPath.item].imageURL {
+                cell.image.downloadImageAndCache(imageURL: profileImageUrl as NSString)
+            }
         }
+        
         
         return cell
     }
