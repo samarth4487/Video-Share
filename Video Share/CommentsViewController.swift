@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class CommentsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class CommentsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
 
     var commentID: String?
     var comments: [Comment] = []
@@ -17,6 +17,10 @@ class CommentsViewController: UICollectionViewController, UICollectionViewDelega
     let bottomView = UIView()
     let messageTextField = UITextField()
     let sendButton = UIButton(type: .system)
+    
+    var currentUserName = ""
+    var currentUserProfileImageURL = ""
+    var currentUserProfileImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,16 +68,30 @@ class CommentsViewController: UICollectionViewController, UICollectionViewDelega
         let childRef = usersReference.child(commentID!)
         let r = childRef.childByAutoId()
         
-        let values = ["comment": messageTextField.text!] as [String : Any]
-        
-        r.updateChildValues(values, withCompletionBlock: {
-            (errUpdate, ref) in
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        let message = messageTextField.text!
+        FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {
+            (snapshot) in
             
-            if errUpdate != nil {
-                print(errUpdate!.localizedDescription)
-                return
+            if let dict = snapshot.value as? [String: Any] {
+                
+                self.currentUserName = (dict["name"] as? String)!
+                self.currentUserProfileImageURL = (dict["profileImageURL"] as? String)!
+                
+                let values = ["comment": "\(self.currentUserName): \(message)",
+                              "url": self.currentUserProfileImageURL] as [String : Any]
+                
+                r.updateChildValues(values, withCompletionBlock: {
+                    (errUpdate, ref) in
+                    
+                    if errUpdate != nil {
+                        print(errUpdate!.localizedDescription)
+                        return
+                    }
+                })
             }
-        })
+            
+        }, withCancel: nil)
         
         messageTextField.text = ""
         
@@ -92,6 +110,7 @@ class CommentsViewController: UICollectionViewController, UICollectionViewDelega
             if let dict = snapshot.value as? [String:Any] {
                 let comment = Comment()
                 comment.comment = dict["comment"] as? String
+                comment.profileImageURL = dict["url"] as? String
                 
                 self.comments.append(comment)
                 
@@ -117,13 +136,14 @@ class CommentsViewController: UICollectionViewController, UICollectionViewDelega
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "comment", for: indexPath) as! CommentsCell
         
         cell.textLabel.text = comments[indexPath.item].comment
+        cell.profileImageView.downloadImageAndCache(imageURL: comments[indexPath.item].profileImageURL! as NSString)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: UIScreen.main.bounds.width - 16, height: 38)
+        return CGSize(width: UIScreen.main.bounds.width - 16, height: 48)
     }
 
 }

@@ -18,13 +18,23 @@ class CommentsCell: UICollectionViewCell {
     
     let textLabel = UILabel()
     let line = UIView()
+    let profileImageView = UIImageView()
     
     func setupUI() {
+        
+        addSubview(profileImageView)
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.cornerRadius = 15
         
         addSubview(textLabel)
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.text = ""
-        textLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        textLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
         textLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
         textLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         textLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true

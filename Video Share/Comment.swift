@@ -6,9 +6,10 @@
 //  Copyright © 2017 Junkie Labs. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Comment {
     
     var comment: String?
+    var profileImageURL: String?
 }

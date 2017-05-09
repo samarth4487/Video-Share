@@ -83,14 +83,14 @@
 				10122EBF1E9A31460047F926 /* VideosViewCell.swift */,
 				10F26BBC1EC1B2CC009B7712 /* CommentsViewController.swift */,
 				10F26BC01EC1C818009B7712 /* CommentsCell.swift */,
+				10F26BBE1EC1C6C0009B7712 /* Comment.swift */,
+				10122EC11E9A380E0047F926 /* Video.swift */,
+				10122EC31E9A3F180047F926 /* UIImageViewExtension.swift */,
 				106CC5701E517A56004F75E9 /* Main.storyboard */,
 				106CC5731E517A56004F75E9 /* Assets.xcassets */,
 				106CC5751E517A56004F75E9 /* LaunchScreen.storyboard */,
 				106CC5781E517A56004F75E9 /* Info.plist */,
 				10F1D1651E5AF3400071E2C0 /* GoogleService-Info.plist */,
-				10F26BBE1EC1C6C0009B7712 /* Comment.swift */,
-				10122EC11E9A380E0047F926 /* Video.swift */,
-				10122EC31E9A3F180047F926 /* UIImageViewExtension.swift */,
 			);
 			path = "Video Share";
 			sourceTree = "<group>";
