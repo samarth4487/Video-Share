@@ -17,6 +17,9 @@
 		106CC5741E517A56004F75E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 106CC5731E517A56004F75E9 /* Assets.xcassets */; };
 		106CC5771E517A56004F75E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 106CC5751E517A56004F75E9 /* LaunchScreen.storyboard */; };
 		10F1D1661E5AF3400071E2C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10F1D1651E5AF3400071E2C0 /* GoogleService-Info.plist */; };
+		10F26BBD1EC1B2CC009B7712 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F26BBC1EC1B2CC009B7712 /* CommentsViewController.swift */; };
+		10F26BBF1EC1C6C0009B7712 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F26BBE1EC1C6C0009B7712 /* Comment.swift */; };
+		10F26BC11EC1C818009B7712 /* CommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F26BC01EC1C818009B7712 /* CommentsCell.swift */; };
 		41E384C30CA5B4B74154BEBD /* Pods_Video_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E013C4E7D2EB1468F266D4B2 /* Pods_Video_Share.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +36,9 @@
 		106CC5761E517A56004F75E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		106CC5781E517A56004F75E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10F1D1651E5AF3400071E2C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		10F26BBC1EC1B2CC009B7712 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		10F26BBE1EC1C6C0009B7712 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		10F26BC01EC1C818009B7712 /* CommentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsCell.swift; sourceTree = "<group>"; };
 		21A72E7EF066504BEA3E6D57 /* Pods-Video Share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Video Share.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Video Share/Pods-Video Share.debug.xcconfig"; sourceTree = "<group>"; };
 		3FD100DE5CD89249D644DBA2 /* Pods-Video Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Video Share.release.xcconfig"; path = "Pods/Target Support Files/Pods-Video Share/Pods-Video Share.release.xcconfig"; sourceTree = "<group>"; };
 		E013C4E7D2EB1468F266D4B2 /* Pods_Video_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Video_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,11 +81,14 @@
 				101E0F871E851C9700FC75B3 /* LoginViewController.swift */,
 				101E0F891E851CA300FC75B3 /* VideosViewController.swift */,
 				10122EBF1E9A31460047F926 /* VideosViewCell.swift */,
+				10F26BBC1EC1B2CC009B7712 /* CommentsViewController.swift */,
+				10F26BC01EC1C818009B7712 /* CommentsCell.swift */,
 				106CC5701E517A56004F75E9 /* Main.storyboard */,
 				106CC5731E517A56004F75E9 /* Assets.xcassets */,
 				106CC5751E517A56004F75E9 /* LaunchScreen.storyboard */,
 				106CC5781E517A56004F75E9 /* Info.plist */,
 				10F1D1651E5AF3400071E2C0 /* GoogleService-Info.plist */,
+				10F26BBE1EC1C6C0009B7712 /* Comment.swift */,
 				10122EC11E9A380E0047F926 /* Video.swift */,
 				10122EC31E9A3F180047F926 /* UIImageViewExtension.swift */,
 			);
@@ -229,7 +238,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				10122EC01E9A31460047F926 /* VideosViewCell.swift in Sources */,
+				10F26BC11EC1C818009B7712 /* CommentsCell.swift in Sources */,
 				101E0F8A1E851CA300FC75B3 /* VideosViewController.swift in Sources */,
+				10F26BBD1EC1B2CC009B7712 /* CommentsViewController.swift in Sources */,
+				10F26BBF1EC1C6C0009B7712 /* Comment.swift in Sources */,
 				10122EC41E9A3F180047F926 /* UIImageViewExtension.swift in Sources */,
 				101E0F881E851C9700FC75B3 /* LoginViewController.swift in Sources */,
 				106CC56D1E517A56004F75E9 /* AppDelegate.swift in Sources */,

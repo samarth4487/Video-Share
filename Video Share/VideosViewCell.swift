@@ -22,6 +22,9 @@ class VideosViewCell: UICollectionViewCell {
     let image = UIImageView()
     let playButton = UIButton(type: .system)
     let titleLabel = UILabel()
+    let likesLabel = UILabel()
+    let commentsLabel = UILabel()
+    let line = UIView()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     func setupUI() {
@@ -71,6 +74,7 @@ class VideosViewCell: UICollectionViewCell {
         titleLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 4).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -4).isActive = true
         titleLabel.text = ""
+        titleLabel.textAlignment = .center
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         videoView.addSubview(activityIndicator)

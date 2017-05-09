@@ -14,9 +14,6 @@ import MobileCoreServices
 class VideosViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var videos = [Video]()
-    var trendingVideos = [Video]()
-    let bottomView = UIView()
-    let modeButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,87 +27,17 @@ class VideosViewController: UICollectionViewController, UICollectionViewDelegate
         collectionView?.register(VideosViewCell.self, forCellWithReuseIdentifier: "cell")
         
         collectionView?.backgroundColor = UIColor.white
-        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 53, right: 0)
+        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         collectionView?.delegate = self
         collectionView?.dataSource = self
         
         checkIfUserIsLoggedIn()
-        
-        view.addSubview(bottomView)
-        bottomView.backgroundColor = UIColor.blue
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        bottomView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -45).isActive = true
-        bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        bottomView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        
-        bottomView.addSubview(modeButton)
-        modeButton.translatesAutoresizingMaskIntoConstraints = false
-        modeButton.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor).isActive = true
-        modeButton.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor).isActive = true
-        modeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        modeButton.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: 16).isActive = true
-        modeButton.rightAnchor.constraint(equalTo: bottomView.rightAnchor, constant: -16).isActive = true
-        modeButton.setTitle("All Videos", for: .normal)
-        modeButton.setTitleColor(UIColor.black, for: .normal)
-        modeButton.backgroundColor = UIColor.blue
-        modeButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        modeButton.addTarget(self, action: #selector(modeChanged), for: .touchUpInside)
-    }
-    
-    func modeChanged() {
-        
-        if modeButton.titleLabel?.text == "All Videos" {
-            
-            modeButton.setTitle("Trending Videos", for: .normal)
-            observeTrendingVideos()
-            //collectionView?.reloadData()
-        } else {
-            
-            modeButton.setTitle("All Videos", for: .normal)
-            observeVideos()
-            //collectionView?.reloadData()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        if modeButton.titleLabel?.text == "All Videos" {
-            observeVideos()
-        } else {
-            observeTrendingVideos()
-        }
-    }
-    
-    func observeTrendingVideos() {
-        
-        trendingVideos = []
-        
-        let ref = FIRDatabase.database().reference().child("videos")
-        
-        ref.observe(.childAdded, with: {
-            ( snapshot ) in
-            
-            if let dict = snapshot.value as? [String:Any] {
-                let video = Video()
-                video.title = dict["title"] as? String
-                video.imageURL = dict["imageURL"] as? String
-                video.videoURL = dict["videoURL"] as? String
-                video.views = dict["views"] as? Int
-                
-                self.trendingVideos.append(video)
-                //print(self.trendingVideos.count)
-                
-                self.trendingVideos = self.trendingVideos.sorted(by: { $0.views! > $1.views! })
-                
-                DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
-                }
-            }
-            
-        }, withCancel: nil)
-        
+        observeVideos()
     }
     
     func observeVideos() {
@@ -127,6 +54,7 @@ class VideosViewController: UICollectionViewController, UICollectionViewDelegate
                 video.title = dict["title"] as? String
                 video.imageURL = dict["imageURL"] as? String
                 video.videoURL = dict["videoURL"] as? String
+                video.commentID = dict["comments"] as? String
                 
                 self.videos.append(video)
                 //print("jhghjghghjgh")
@@ -145,12 +73,7 @@ class VideosViewController: UICollectionViewController, UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if modeButton.titleLabel?.text == "All Videos" {
-            return videos.count
-        } else {
-            return trendingVideos.count
-        }
-        
+        return videos.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,25 +83,22 @@ class VideosViewController: UICollectionViewController, UICollectionViewDelegate
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 10
         
+        cell.video = videos[indexPath.item]
+        cell.titleLabel.text = videos[indexPath.item].title
         
-        if modeButton.titleLabel?.text == "All Videos" {
-            cell.video = videos[indexPath.item]
-            cell.titleLabel.text = videos[indexPath.item].title
-            
-            if let profileImageUrl = videos[indexPath.item].imageURL {
-                cell.image.downloadImageAndCache(imageURL: profileImageUrl as NSString)
-            }
-        } else {
-            cell.video = trendingVideos[indexPath.item]
-            cell.titleLabel.text = trendingVideos[indexPath.item].title
-            
-            if let profileImageUrl = trendingVideos[indexPath.item].imageURL {
-                cell.image.downloadImageAndCache(imageURL: profileImageUrl as NSString)
-            }
+        if let profileImageUrl = videos[indexPath.item].imageURL {
+            cell.image.downloadImageAndCache(imageURL: profileImageUrl as NSString)
         }
         
-        
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let layout = UICollectionViewFlowLayout()
+        let commentsViewController = CommentsViewController(collectionViewLayout: layout)
+        commentsViewController.commentID = videos[indexPath.item].commentID
+        self.navigationController?.pushViewController(commentsViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -315,10 +235,13 @@ class VideosViewController: UICollectionViewController, UICollectionViewDelegate
         let usersReference = ref.child("videos")
         let childReference = usersReference.childByAutoId()
         //let uid = FIRAuth.auth()?.currentUser?.uid
+        let commentsID = NSUUID().uuidString
+        
         let values = ["videoURL": uploadURL,
                       "imageURL": imageURL,
                       "title": videoTitle,
-                      "views": 0] as [String : Any]
+                      "views": 0,
+                      "comments": commentsID] as [String : Any]
         
         childReference.updateChildValues(values, withCompletionBlock: {
             (errUpdate, ref) in
